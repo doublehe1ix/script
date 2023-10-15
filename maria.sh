@@ -9,4 +9,6 @@ sudo systemctl start mariadb
 root_password=Qwedsa!1
  
 # Установка root-пароля для СУБД
-sudo mysql -e "UPDATE mysql.user SET Password = PASSWORD('$root_password') WHERE User = 'root'"
+sudo mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$root_password';"
+sudo mysql -e "UPDATE mysql.user SET authentication_string = '' WHERE user = 'root';"
+sudo mysql -e "UPDATE mysql.user SET plugin = '' WHERE user = 'root';"
